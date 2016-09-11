@@ -17,14 +17,14 @@ namespace TestStack.White.UIItems
     /// A ListView consists of ListViewHeader and ListViewRows. ListViewHeader contains ListViewColumns. ListViewRows is collection of all the visible
     /// rows. A ListViewRow consists of ListViewCells.
     /// </summary>
-    public class ListView : UIItem, SuggestionList, VerticalSpanProvider
+    public class ListView : UIItem, ISuggestionList, IVerticalSpanProvider
     {
         private readonly ListViewFactory listViewFactory;
         private AutomationPropertyChangedEventHandler handler;
 
         protected ListView() {}
 
-        public ListView(AutomationElement automationElement, ActionListener actionListener) : base(automationElement, actionListener)
+        public ListView(AutomationElement automationElement, IActionListener actionListener) : base(automationElement, actionListener)
         {
             listViewFactory = new ListViewFactory(new AutomationElementFinder(automationElement), this);
         }
@@ -124,7 +124,7 @@ namespace TestStack.White.UIItems
         }
 
         //TODO While recording you get exception when clicking at the corner of the cell
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             var safeAutomationEventHandler =
                 new SafeAutomationEventHandler(this, eventListener, objs => ListViewEvent.Create(this, (AutomationPropertyChangedEventArgs) objs[0]));

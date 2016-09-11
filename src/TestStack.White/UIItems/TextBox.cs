@@ -6,11 +6,11 @@ using TestStack.White.UIItems.Actions;
 
 namespace TestStack.White.UIItems
 {
-    public class TextBox : UIItem, Scrollable
+    public class TextBox : UIItem, IScrollable
     {
         private AutomationPropertyChangedEventHandler handler;
         protected TextBox() {}
-        public TextBox(AutomationElement automationElement, ActionListener actionListener) : base(automationElement, actionListener) {}
+        public TextBox(AutomationElement automationElement, IActionListener actionListener) : base(automationElement, actionListener) {}
 
         /// <summary>
         /// Enters the text in the textbox. The text would be cleared first. This is not as good performing as the BulkText method. 
@@ -77,7 +77,7 @@ namespace TestStack.White.UIItems
             mouse.Click(Bounds.Center(), actionListener);
         }
 
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             handler = delegate { eventListener.EventOccured(new TextBoxEvent(this)); };
             Automation.AddAutomationPropertyChangedEventHandler(automationElement, TreeScope.Element, handler, ValuePattern.ValueProperty);

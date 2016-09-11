@@ -8,7 +8,7 @@ namespace TestStack.White.UIItems
     public class Hyperlink : UIItem
     {
         protected Hyperlink() {}
-        public Hyperlink(AutomationElement automationElement, ActionListener actionListener) : base(automationElement, actionListener) {}
+        public Hyperlink(AutomationElement automationElement, IActionListener actionListener) : base(automationElement, actionListener) {}
 
         public virtual void Click(int xOffset, int yOffset)
         {
@@ -17,7 +17,7 @@ namespace TestStack.White.UIItems
             mouse.Click(new Point((int) x, (int) y), actionListener);
         }
 
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             HookClickEvent(eventListener);
         }

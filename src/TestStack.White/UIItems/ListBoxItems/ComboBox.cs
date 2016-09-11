@@ -16,7 +16,7 @@ namespace TestStack.White.UIItems.ListBoxItems
         {
         }
 
-        public ComboBox(AutomationElement automationElement, ActionListener actionListener) : base(automationElement, actionListener)
+        public ComboBox(AutomationElement automationElement, IActionListener actionListener) : base(automationElement, actionListener)
         {
             this.actionListener = actionListener;
         }
@@ -89,7 +89,7 @@ namespace TestStack.White.UIItems.ListBoxItems
                 p.Collapse();
         }
 
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             lastSelectedItem = SelectedItem;
             handler = delegate(object sender, AutomationPropertyChangedEventArgs e)

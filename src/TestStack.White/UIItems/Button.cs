@@ -9,13 +9,13 @@ namespace TestStack.White.UIItems
     {
         private readonly ToggleableItem toggleableItem;
         protected Button() { }
-        public Button(AutomationElement automationElement, ActionListener actionListener)
+        public Button(AutomationElement automationElement, IActionListener actionListener)
             : base(automationElement, actionListener)
         {
             toggleableItem = new ToggleableItem(this);
         }
 
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             HookClickEvent(eventListener);
         }

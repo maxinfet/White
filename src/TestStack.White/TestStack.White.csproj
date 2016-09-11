@@ -34,7 +34,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -59,6 +58,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\TestStack.White.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591, 1570</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
@@ -95,6 +96,7 @@
     <Compile Include="Configuration\WhiteDefaultLoggerFactory.cs" />
     <Compile Include="Drawing\ScreenRectangle.cs" />
     <Compile Include="InputDevices\Input64.cs" />
+    <Compile Include="InputDevices\MouseButton.cs" />
     <Compile Include="InputDevices\SystemMetric.cs" />
     <Compile Include="Interceptors\IWhiteInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,12 +113,11 @@
     <Compile Include="AutomationException.cs" />
     <Compile Include="CacheMode.cs" />
     <Compile Include="Configuration\CoreAppXmlConfiguration.cs" />
-    <Compile Include="Configuration\CoreConfiguration.cs" />
+    <Compile Include="Configuration\ICoreConfiguration.cs" />
     <Compile Include="Configuration\IWaitHook.cs" />
     <Compile Include="Configuration\UIItemIdAppXmlConfiguration.cs" />
-    <Compile Include="Configuration\UIItemIdConfiguration.cs" />
+    <Compile Include="Configuration\IUIItemIdConfiguration.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="CoreTestTemplate.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Desktop.cs" />
     <Compile Include="Drawing\DrawingPointX.cs" />
@@ -125,11 +126,11 @@
     <Compile Include="Factory\DictionaryMappedItemFactory.cs" />
     <Compile Include="Factory\ListViewCellFactory.cs" />
     <Compile Include="Factory\PrimaryUIItemFactory.cs" />
-    <Compile Include="Factory\SpecializedWindowFactory.cs" />
+    <Compile Include="Factory\ISpecializedWindowFactory.cs" />
     <Compile Include="Factory\TableCellFactory.cs" />
     <Compile Include="Factory\TableHeaderFactory.cs" />
     <Compile Include="Factory\TableRowFactory.cs" />
-    <Compile Include="Factory\UIItemFactory.cs" />
+    <Compile Include="Factory\IUIItemFactory.cs" />
     <Compile Include="Factory\UIItemProxyFactory.cs" />
     <Compile Include="Factory\UIItemSearchException.cs" />
     <Compile Include="Factory\WindowFactory.cs" />
@@ -145,7 +146,6 @@
     <Compile Include="InputDevices\Keyboard.cs" />
     <Compile Include="InputDevices\Mouse.cs" />
     <Compile Include="InputDevices\MouseCursor.cs" />
-    <Compile Include="InputDevices\MouseIcon.cs" />
     <Compile Include="Interceptors\CoreInterceptContext.cs" />
     <Compile Include="Interceptors\ScrollInterceptor.cs" />
     <Compile Include="Mappings\ControlDictionaryItems.cs" />
@@ -156,6 +156,7 @@
     <Compile Include="ScreenMap\WindowsAutomationTypesSurrogates.cs" />
     <Compile Include="Span.cs" />
     <Compile Include="SystemExtensions\DoubleX.cs" />
+    <Compile Include="SystemExtensions\RectangleExtensions.cs" />
     <Compile Include="SystemExtensions\TypeExtensions.cs" />
     <Compile Include="UIA\AutomationElementCollectionX.cs" />
     <Compile Include="UIA\AutomationElementX.cs" />
@@ -183,7 +184,7 @@
     <Compile Include="UIItems\Scrolling\ScrollBarButtonAutomationIds.cs" />
     <Compile Include="UIItems\Scrolling\SilverlightHScrollBarButtonAutomationIds.cs" />
     <Compile Include="UIItems\Scrolling\SilverlightVScrollBarButtonAutomationIds.cs" />
-    <Compile Include="UIItems\Scrolling\VerticalSpanProvider.cs" />
+    <Compile Include="UIItems\Scrolling\IVerticalSpanProvider.cs" />
     <Compile Include="UIItems\Scrolling\WpfTreeViewHScrollBar.cs" />
     <Compile Include="UIItems\Scrolling\WpfTreeViewScrollBar.cs" />
     <Compile Include="UIItems\Scrolling\WpfTreeViewScrollBars.cs" />
@@ -194,7 +195,7 @@
     <Compile Include="UIItems\DateFormat.cs" />
     <Compile Include="UIItems\TabItems\TabPages.cs" />
     <Compile Include="UIItems\TableItems\NullTableHeader.cs" />
-    <Compile Include="UIItems\TableItems\TableVerticalScrollOffset.cs" />
+    <Compile Include="UIItems\TableItems\ITableVerticalScrollOffset.cs" />
     <Compile Include="UIItems\Thumb.cs" />
     <Compile Include="UIItems\ToggleableItem.cs" />
     <Compile Include="UIItems\WindowItems\SilverlightChildWindow.cs" />
@@ -209,12 +210,9 @@
     <Compile Include="UIItems\WPFUIItems\WPFUIItem.cs" />
     <Compile Include="Utility\DelegateDisposable.cs" />
     <Compile Include="Utility\MethodNameResolver.cs" />
-    <Compile Include="Utility\MonitorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Utility\PropertyResolver.cs" />
     <Compile Include="Utility\Retry.cs" />
-    <Compile Include="Utility\TestExecutionMonitor.cs" />
+    <Compile Include="Utility\SystemLanguageRetreiver.cs" />
     <Compile Include="WindowsAPI\InputFactory.cs" />
     <Compile Include="WindowsAPI\ThirtyTwoBitInput.cs" />
     <Compile Include="WindowsAPI\WindowPlacement.cs" />
@@ -224,8 +222,6 @@
     <Compile Include="Mappings\ControlDictionary.cs" />
     <Compile Include="Mappings\ControlDictionaryException.cs" />
     <Compile Include="Mappings\ControlDictionaryItem.cs" />
-    <Compile Include="NullApplication.cs" />
-    <Compile Include="Processes.cs" />
     <Compile Include="Recording\SafeAutomationEventHandler.cs" />
     <Compile Include="Recording\UIItemEventListener.cs" />
     <Compile Include="ScreenMap\UIItemLocation.cs" />
@@ -234,7 +230,7 @@
     <Compile Include="Sessions\NoApplicationSession.cs" />
     <Compile Include="Sessions\NullWindowSession.cs" />
     <Compile Include="Sessions\WindowSession.cs" />
-    <Compile Include="UIItemEvents\EventOption.cs" />
+    <Compile Include="UIItemEvents\IEventOption.cs" />
     <Compile Include="UIItemEvents\TreeNodeEvent.cs" />
     <Compile Include="UIItemEvents\UIItemClickEvent.cs" />
     <Compile Include="UIItemEvents\CheckBoxEvent.cs" />
@@ -254,7 +250,7 @@
     <Compile Include="UIItemList.cs" />
     <Compile Include="UIItems\ActionDetails.cs" />
     <Compile Include="UIItems\Actions\Action.cs" />
-    <Compile Include="UIItems\Actions\ActionListener.cs" />
+    <Compile Include="UIItems\Actions\IActionListener.cs" />
     <Compile Include="UIItems\Actions\ActionType.cs" />
     <Compile Include="UIItems\Actions\ProcessActionListener.cs" />
     <Compile Include="UIItems\Button.cs" />
@@ -294,7 +290,7 @@
     <Compile Include="UIItems\ListViewItems\ListViewColumns.cs" />
     <Compile Include="UIItems\ListViewItems\ListViewFactory.cs" />
     <Compile Include="UIItems\ListViewItems\ListViewHeader.cs" />
-    <Compile Include="UIItems\ListViewItems\SuggestionList.cs" />
+    <Compile Include="UIItems\ListViewItems\ISuggestionList.cs" />
     <Compile Include="UIItems\ListViewItems\SuggestionListView.cs" />
     <Compile Include="UIItems\ListViewRow.cs" />
     <Compile Include="UIItems\ListViewRows.cs" />
@@ -305,7 +301,7 @@
     <Compile Include="UIItems\PlatformSpecificItemAttribute.cs" />
     <Compile Include="UIItems\ProgressBar.cs" />
     <Compile Include="UIItems\RadioButton.cs" />
-    <Compile Include="UIItems\Scrollable.cs" />
+    <Compile Include="UIItems\IScrollable.cs" />
     <Compile Include="UIItems\Scrolling\HScrollBar.cs" />
     <Compile Include="UIItems\Scrolling\IHScrollBar.cs" />
     <Compile Include="UIItems\Scrolling\IScrollBar.cs" />
@@ -349,7 +345,7 @@
     <Compile Include="UIItems\TreeItems\TreeNode.cs" />
     <Compile Include="UIItems\TreeItems\TreeNodes.cs" />
     <Compile Include="UIItems\TreeItems\TreeNodeSelectEvent.cs" />
-    <Compile Include="UIItems\TreeItems\TreeNodeVisitor.cs" />
+    <Compile Include="UIItems\TreeItems\ITreeNodeVisitor.cs" />
     <Compile Include="UIItems\TreeItems\Win32TreeNode.cs" />
     <Compile Include="UIItems\TreeItems\WPFTreeNode.cs" />
     <Compile Include="UIItems\UIActionException.cs" />
@@ -365,7 +361,7 @@
     <Compile Include="UIItems\WindowsFramework.cs" />
     <Compile Include="UIItems\WindowStripControls\ContainerStrip.cs" />
     <Compile Include="UIItems\WindowStripControls\MenuBar.cs" />
-    <Compile Include="UIItems\WindowStripControls\MenuContainer.cs" />
+    <Compile Include="UIItems\WindowStripControls\IMenuContainer.cs" />
     <Compile Include="UIItems\WindowStripControls\StatusStrip.cs" />
     <Compile Include="UIItems\WindowStripControls\StatusStripSplitButton.cs" />
     <Compile Include="UIItems\WindowStripControls\ToolStrip.cs" />
@@ -375,23 +371,14 @@
     <Compile Include="VerticalSpan.cs" />
     <Compile Include="WhiteAssertionException.cs" />
     <Compile Include="WhiteException.cs" />
-    <Compile Include="WindowControlVisitor.cs" />
+    <Compile Include="IWindowControlVisitor.cs" />
     <Compile Include="WindowsAPI\Input.cs" />
     <Compile Include="WindowsAPI\NativeWindow.cs" />
     <Compile Include="WindowsAPI\DisplayedItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Init.ps1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
-    <None Include="TestStack.White.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TestStack.White.psm1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="white.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -421,13 +408,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="readme.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

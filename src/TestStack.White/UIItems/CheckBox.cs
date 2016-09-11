@@ -13,7 +13,7 @@ namespace TestStack.White.UIItems
         {
         }
 
-        public CheckBox(AutomationElement automationElement, ActionListener actionListener) : base(automationElement, actionListener)
+        public CheckBox(AutomationElement automationElement, IActionListener actionListener) : base(automationElement, actionListener)
         {
         }
 
@@ -48,7 +48,7 @@ namespace TestStack.White.UIItems
             Checked = false;
         }
 
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             handler = delegate
                           {

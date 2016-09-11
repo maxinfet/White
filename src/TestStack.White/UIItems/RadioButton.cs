@@ -9,9 +9,9 @@ namespace TestStack.White.UIItems
     {
         private AutomationEventHandler handler;
         protected RadioButton() {}
-        public RadioButton(AutomationElement automationElement, ActionListener actionListener) : base(automationElement, actionListener) {}
+        public RadioButton(AutomationElement automationElement, IActionListener actionListener) : base(automationElement, actionListener) {}
 
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             handler = delegate { eventListener.EventOccured(new RadioButtonEvent(this)); };
             Automation.AddAutomationEventHandler(SelectionItemPattern.ElementSelectedEvent, automationElement, TreeScope.Element, handler);

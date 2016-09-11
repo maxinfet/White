@@ -1,3 +1,33 @@
+# 0.14.0 (TBD)
+
+### Features
+- Migration to nUnit - [#348](https://github.com/TestStack/White/pull/348)
+- Being able to capture part of the screen - [#350](https://github.com/TestStack/White/pull/350), [#260](https://github.com/TestStack/White/pull/260) (Slightly modified version of ([HEskandari](https://github.com/HEskandari))
+- Added color parameter to DrawHighlight
+- Added some localization for German UI
+- PDB files source indexing [#359]
+
+### Bug Fixes
+None so far
+
+### Breaking Changes
+- Renaming of some interfaces to proper namings
+  - SpecializedWindowFactory to ISpecializedWindowFactory
+  - UIItemFactory to IUIItemFactory
+  - WindowControlVisitor to IWindowControlVisitor
+  - EventOption to IEventOption
+  - ActionListener to IActionListener
+  - Scrollable to IScrollable
+  - SuggestionList to ISuggestionList
+  - VerticalSpanProvider to IVerticalSpanProvider
+  - TableVerticalScrollOffset to ITableVerticalScrollOffset
+  - TreeNodeVisitor to ITreeNodeVisitor
+  - MenuContainer to IMenuContainer
+  - UIItemEventListener to IUIItemEventListener
+- Renaming Functions
+  - Changes in IUIItem / UIItem
+    - Renamed the RaiseClickEvent to Invoke
+
 # 0.13.0 (7 June 2014)
 
  - [#188](https://github.com/TestStack/White/pull/188) - Issue144: Add DrawHighlight method to UIItem contributed by Ilya Murzinov ([ilya-murzinov](https://github.com/ilya-murzinov))

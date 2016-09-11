@@ -10,7 +10,7 @@ namespace TestStack.White.UIItems.ListBoxItems
         private AutomationPropertyChangedEventHandler handler;
 
         protected ListBox() {}
-        public ListBox(AutomationElement automationElement, ActionListener actionListener) : base(automationElement, actionListener) {}
+        public ListBox(AutomationElement automationElement, IActionListener actionListener) : base(automationElement, actionListener) {}
 
         public virtual bool IsChecked(string itemText)
         {
@@ -32,7 +32,7 @@ namespace TestStack.White.UIItems.ListBoxItems
             Item(itemText).UnCheck();
         }
 
-        public override void HookEvents(UIItemEventListener eventListener)
+        public override void HookEvents(IUIItemEventListener eventListener)
         {
             handler = delegate(object sender, AutomationPropertyChangedEventArgs e)
                           {
